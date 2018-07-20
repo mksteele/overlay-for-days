@@ -1,26 +1,9 @@
-import os
 import ttk
 
 from Tkinter import *
 
-""" 
-TODO:
-    - do I even care about scores?
-    - idea for a miscellaneous ticker area:
-            Labels that you can drag and drop
-            Entry at the bottom to add things to the ticker, with a plus sign
-            X buttons next to the ticker items 
-"""
-
-
-
-WIDTH = 200
-HEIGHT = 100
-
-NUM_COL = 4
-NUM_ROW = 5
-
-TEAM_NAMES_FILE = "team_names.txt"
+from base_panel import BasePanel
+from util import read_team_names, write_file
 
 layout = {
     "labels": {
@@ -38,31 +21,14 @@ layout = {
         "gold team": { "row": 3, "col": 1, "out": "Gold Team Name.txt"},
     },
     "buttons": {
-        "Swap Teams" : { "row": NUM_ROW-1, "col": 0 },
+        "Swap Teams" : { "row": 4, "col": 0 },
     },
 }
 
-def read_items_from_src(src):
-    with open(os.path.join('resources', src), 'r') as f:
-        items = [x.strip() for x in f.readlines()]
-        items.sort()
-        return items
+class CurrentGamePanel(BasePanel):
 
-def read_team_names():
-    return read_items_from_src(TEAM_NAMES_FILE)
-
-class OverlayForDays:
-
-    def __init__(self, root):
-        # Setup
-        #self.content = Frame(root)
-        self.content = ttk.Labelframe(root, text='Current Game')
-        self.content.grid(column=1, row=0, padx=10, pady=10)
-
-        self.team_panel = ttk.Labelframe(root, text='Teams')
-        self.team_panel.grid(column=0, row=0, padx=10, pady=10)
-        background = Frame(self.team_panel, width=WIDTH, height=HEIGHT)
-        background.grid(column=0, row=0, columnspan=NUM_COL, rowspan=NUM_ROW)
+    def __init__(self, parent):
+        BasePanel.__init__(self, parent, 'Current Game')
 
         self.create_buttons()
         self.create_labels()
@@ -70,8 +36,6 @@ class OverlayForDays:
         self.create_dropdowns()
 
         self.make_swap_team_button_swap_team()
-
-        self.create_team_names()
         self.grid_everything()
 
     def create_buttons(self):
@@ -100,7 +64,7 @@ class OverlayForDays:
 
         def write_blue_file(*args):
             new_value = blue_info["string_var"].get().strip()
-            print("Writing '{}' to {}".format(new_value, blue_info["out"]))
+            write_file(blue_info["out"], new_value)
 
         # Call write_blue_file every time this variable changes 
         blue_info["string_var"].trace("w", write_blue_file)
@@ -113,7 +77,7 @@ class OverlayForDays:
 
         def write_gold_file(*args):
             new_value = gold_info["string_var"].get().strip()
-            print("Writing '{}' to {}".format(new_value, gold_info["out"]))
+            write_file(gold_info["out"], new_value)
 
         # Call write_gold_file every time this variable changes 
         gold_info["string_var"].trace("w", write_gold_file)
@@ -139,21 +103,3 @@ class OverlayForDays:
             blue_team_str.set(tmp)
 
         swap_team_button.configure(command=swap_team)
-
-    def create_team_names(self):
-        row = 0
-        teams = read_team_names()
-        for team in teams:
-            team_label = Label(self.team_panel, text=team)
-            team_label.grid(row=row, column=0, sticky="ew")
-            row = row + 1
-
-
-def main():
-    root = Tk()
-    root.title("Overlay for days")
-    app = OverlayForDays(root)
-    root.mainloop()
-
-if __name__ == "__main__":
-    main()

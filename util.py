@@ -1,6 +1,6 @@
 import os
 
-from file_names import *
+from file_paths import *
 
 def read_items_from_src(src):
     with open(os.path.join('resources', src), 'r') as f:
@@ -10,3 +10,6 @@ def read_items_from_src(src):
 
 def read_team_names():
     return read_items_from_src(TEAM_NAMES_FILE)
+
+def write_file(fname, value):
+    print("Writing '{}' to {}".format(value, fname))

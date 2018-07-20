@@ -1,23 +1,19 @@
-import ttk
+from Tkinter import Label, Entry
 
-from Tkinter import *
-
-from util import *
+from util import read_team_names
+from base_panel import BasePanel
 
 """
-Team Panel
+TeamPanel
  - Shows existing teams
- - Allows you to 
+ - Allows you to add and remove teams
 """
 
-WIDTH = 200
-HEIGHT = 100
-
-class TeamPanel:
+class TeamPanel(BasePanel):
 
     def __init__(self, parent):
         # Setup
-        self.parent = parent
+        BasePanel.__init__(self, parent, 'Teams')
 
         self.create_team_names()
 
@@ -25,7 +21,7 @@ class TeamPanel:
         row = 0
         teams = read_team_names()
         for team in teams:
-            team_label = Label(self.parent, text=team)
+            team_label = Label(self.content, text=team)
             team_label.grid(row=row, column=0, sticky="ew")
             row = row + 1
 
