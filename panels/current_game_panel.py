@@ -1,13 +1,15 @@
 import Tkinter as tk
 
 from Tkinter import *
+
 from base_panel import BasePanel
+from file_paths import TEAM_NAME_PATTERN
 from util import read_file, read_teams, write_file
 
 COLORS = [ "Blue", "Gold" ]
 
 def team_fname(color):
-    return "{} Team Name.txt".format(color)
+    return TEAM_NAME_PATTERN.format(Color=color)
 
 class CurrentGamePanel(BasePanel):
 

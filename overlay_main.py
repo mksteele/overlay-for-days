@@ -12,6 +12,9 @@ class OverlayForDays:
         self.current_game_panel = CurrentGamePanel(root)
         self.current_game_panel.grid(column=1, row=0, padx=10, pady=10)
 
+        self.ticker_panel = TickerPanel(root)
+        self.ticker_panel.grid(row=1, columnspan=2, padx=10, pady=10)
+
     def notify_teams_change(self):
         # Notify all panels that the teams list has changed
         self.current_game_panel.notify_teams_change()

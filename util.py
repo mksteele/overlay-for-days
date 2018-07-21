@@ -17,7 +17,6 @@ def read_teams():
     return read_file(TEAM_NAMES_FILE)
 
 def write_teams(teams):
-    print("New teams: {}".format(teams))
     write_file(TEAM_NAMES_FILE, teams)
 
 def add_team_to_file(team):
@@ -28,7 +27,6 @@ def add_team_to_file(team):
 def remove_team_from_file(team):
     teams = read_teams()
     teams.remove(team)
-    print("New teams: {}".format(teams))
     write_teams(teams)
 
 def write_file(fname, value_or_values):

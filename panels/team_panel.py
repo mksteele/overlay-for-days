@@ -5,8 +5,6 @@ from Tkinter import *
 from util import read_teams, add_team_to_file, remove_team_from_file
 from base_panel import BasePanel
 
-from lib.vertical_scrolled_frame import VerticalScrolledFrame
-
 """
 TeamPanel
  - Shows existing teams
@@ -22,9 +20,6 @@ class TeamPanel(BasePanel):
         BasePanel.__init__(self, parent, 'Teams')
 
         self.notify_callback = notify_callback
-
-        self.content.configure(bg='red')
-
         self.create_teams()
         self.create_add_team_entry()
 
