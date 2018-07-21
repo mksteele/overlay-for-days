@@ -46,11 +46,11 @@ def remove_team_from_file(team):
 
 """
 ***************
-**  TICKER   **
+**  SCROLL_TEXT   **
 ***************
 """
-def read_ticker():
-    scroll_text = read_file(TICKER_FILE)
+def read_scroll_text():
+    scroll_text = read_file(SCROLL_TEXT_FILE)
     # Splitting on at least 3 spaces. Could be buggy
     return re.split(r'\s{3,}', scroll_text)
 
@@ -58,5 +58,5 @@ def replace_files_with_originals():
     """ Used only for testing """
     copyfile(os.path.join('resources', GOLDEN_TEAM_NAMES_FILE),
             os.path.join('resources', TEAM_NAMES_FILE))
-    copyfile(os.path.join('resources', GOLDEN_TICKER_FILE),
-            os.path.join('resources', TICKER_FILE))
+    copyfile(os.path.join('resources', GOLDEN_SCROLL_TEXT_FILE),
+            os.path.join('resources', SCROLL_TEXT_FILE))

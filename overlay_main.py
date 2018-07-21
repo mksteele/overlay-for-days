@@ -13,7 +13,7 @@ class OverlayForDays:
         pady = 10
         team_panel_width = 250
         current_game_panel_width = 380
-        ticker_panel_width = team_panel_width + current_game_panel_width + 2*padx
+        scroll_text_panel_width = team_panel_width + current_game_panel_width + 2*padx
 
         self.team_panel = TeamPanel(root, self.notify_teams_change,
                 width=team_panel_width, height=HEIGHT)
@@ -24,8 +24,8 @@ class OverlayForDays:
                 height=HEIGHT)
         self.current_game_panel.grid(column=1, row=0, padx=10, pady=10)
 
-        self.ticker_panel = TickerPanel(root, width=ticker_panel_width, height=230)
-        self.ticker_panel.grid(row=1, columnspan=2, padx=10, pady=10)
+        self.scroll_text_panel = ScrollTextPanel(root, width=scroll_text_panel_width, height=230)
+        self.scroll_text_panel.grid(row=1, columnspan=2, padx=10, pady=10)
 
     def notify_teams_change(self):
         # Notify all panels that the teams list has changed

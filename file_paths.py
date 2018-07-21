@@ -11,5 +11,5 @@ GOLDEN_TEAM_NAMES_FILE = "OrigTeams.txt"
 
 TEAM_NAME_PATTERN = "{Color} Team Name.txt"
 
-TICKER_FILE = "ScrollText.txt"
-GOLDEN_TICKER_FILE = "OrigScrollText.txt"
+SCROLL_TEXT_FILE = "ScrollText.txt"
+GOLDEN_SCROLL_TEXT_FILE = "OrigScrollText.txt"
