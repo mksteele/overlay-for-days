@@ -4,14 +4,17 @@ from shutil import copyfile
 from file_paths import *
 
 
-def read_items_from_src(src):
+def read_file(src):
+    """ Returns a list if the file has multiple lines, else one value """
     with open(os.path.join('resources', src), 'r') as f:
         items = [x.strip() for x in f.readlines()]
-        items = sorted(items, key=lambda s: s.lower())
-        return items
+        if len(items) > 1:
+            return sorted(items, key=lambda s: s.lower())
+        else:
+            return items[0] if items else ""
 
 def read_teams():
-    return read_items_from_src(TEAM_NAMES_FILE)
+    return read_file(TEAM_NAMES_FILE)
 
 def write_teams(teams):
     print("New teams: {}".format(teams))

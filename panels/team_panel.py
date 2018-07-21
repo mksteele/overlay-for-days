@@ -70,6 +70,7 @@ class TeamPanel(BasePanel):
                 add_team_str.set("")
                 self.listbox.delete(0, 'end')
                 self.populate_listbox()
+                self.notify_callback()
 
         plus_button = Button(self.content, command=add_team_to_listbox, text='+')
         plus_button.grid(row=1, column=1)
