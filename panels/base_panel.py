@@ -6,12 +6,9 @@ from Tkinter import Frame, BOTH
 BasePanel: A base panel class that all other panels should extend
 """
 
-WIDTH = 300
-HEIGHT = 250
-
 class BasePanel:
 
-    def __init__(self, parent, text, width=WIDTH, height=HEIGHT):
+    def __init__(self, parent, text, width=None, height=None):
         self.parent = parent
         self.text = text
         self.frame = ttk.LabelFrame(self.parent, text=self.text)

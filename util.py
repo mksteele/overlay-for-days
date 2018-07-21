@@ -1,4 +1,5 @@
 import os
+import re
 
 from shutil import copyfile
 from file_paths import *
@@ -12,6 +13,20 @@ def read_file(src):
             return sorted(items, key=lambda s: s.lower())
         else:
             return items[0] if items else ""
+
+def write_file(fname, value_or_values):
+    print("Writing '{}' to {}".format(value_or_values, fname))
+    with open(os.path.join('resources', fname), 'w') as f:
+        if isinstance(value_or_values, list):
+            [ f.write("{}\n".format(x)) for x in value_or_values]
+        else:
+            f.write(value_or_values)
+
+"""
+***************
+**   TEAMS   **
+***************
+"""
 
 def read_teams():
     return read_file(TEAM_NAMES_FILE)
@@ -29,15 +44,19 @@ def remove_team_from_file(team):
     teams.remove(team)
     write_teams(teams)
 
-def write_file(fname, value_or_values):
-    print("Writing '{}' to {}".format(value_or_values, fname))
-    with open(os.path.join('resources', fname), 'w') as f:
-        if isinstance(value_or_values, list):
-            [ f.write("{}\n".format(x)) for x in value_or_values]
-        else:
-            f.write(value_or_values)
+"""
+***************
+**  TICKER   **
+***************
+"""
+def read_ticker():
+    scroll_text = read_file(TICKER_FILE)
+    # Splitting on at least 3 spaces. Could be buggy
+    return re.split(r'\s{3,}', scroll_text)
 
-def replace_team_names_with_original():
+def replace_files_with_originals():
     """ Used only for testing """
     copyfile(os.path.join('resources', GOLDEN_TEAM_NAMES_FILE),
             os.path.join('resources', TEAM_NAMES_FILE))
+    copyfile(os.path.join('resources', GOLDEN_TICKER_FILE),
+            os.path.join('resources', TICKER_FILE))

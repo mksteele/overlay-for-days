@@ -13,8 +13,9 @@ def team_fname(color):
 
 class CurrentGamePanel(BasePanel):
 
-    def __init__(self, parent):
-        BasePanel.__init__(self, parent, 'Current Game')
+    def __init__(self, parent, width=None, height=None):
+        BasePanel.__init__(self, parent, 'Current Game', width=width,
+                height=height)
 
         self.create_team_selectors()
         self.create_swap_button()
@@ -68,7 +69,7 @@ class CurrentGamePanel(BasePanel):
     def create_swap_button(self):
         """ Make a button to swap blue and gold teams. """
         swap_button = Button(self.content, text="Swap Teams")
-        swap_button.grid(row=3, column=1)
+        swap_button.grid(row=3, column=0, sticky="ew")
 
         def swap_team():
             """ Do the team swapping"""

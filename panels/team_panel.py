@@ -15,13 +15,14 @@ TEAM_HEIGHT = 10
 
 class TeamPanel(BasePanel):
 
-    def __init__(self, parent, notify_callback):
+    def __init__(self, parent, notify_callback, width=None, height=None):
         # Setup
-        BasePanel.__init__(self, parent, 'Teams')
+        BasePanel.__init__(self, parent, 'Teams', width=width,
+                height=height)
 
         self.notify_callback = notify_callback
         self.create_teams()
-        self.create_add_team_entry()
+        self.create_add_team_button()
 
     def create_teams(self):
         self.team_list_frame = Frame(self.content)
@@ -52,11 +53,11 @@ class TeamPanel(BasePanel):
         for team in teams:
             self.listbox.insert(END, team)
 
-    def create_add_team_entry(self):
+    def create_add_team_button(self):
         """ Want a text entry where we can add a new team """
         add_team_str = StringVar(self.content)
-        add_team_entry = Entry(self.content, textvariable=add_team_str)
-        add_team_entry.grid(row=1, column=0)
+        #add_team_entry = Entry(self.content, textvariable=add_team_str)
+        #add_team_entry.grid(row=1, column=0)
 
         def add_team_to_listbox(*args):
             new_team = add_team_str.get().strip()
@@ -67,7 +68,7 @@ class TeamPanel(BasePanel):
                 self.populate_listbox()
                 self.notify_callback()
 
-        plus_button = Button(self.content, command=add_team_to_listbox, text='+')
-        plus_button.grid(row=1, column=1)
-        add_team_entry.bind('<Return>', add_team_to_listbox)
+        add_team_button = Button(self.content, text='Add team',
+                command=add_team_to_listbox)
+        add_team_button.grid(row=1, column=0)
 

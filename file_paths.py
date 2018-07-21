@@ -6,7 +6,10 @@ I think I might either write them as .txt or .ods?
 """
 
 
-TEAM_NAMES_FILE = "team_names.txt"
-GOLDEN_TEAM_NAMES_FILE = "orig_teams.txt"
+TEAM_NAMES_FILE = "Teams.txt"
+GOLDEN_TEAM_NAMES_FILE = "OrigTeams.txt"
 
 TEAM_NAME_PATTERN = "{Color} Team Name.txt"
+
+TICKER_FILE = "ScrollText.txt"
+GOLDEN_TICKER_FILE = "OrigScrollText.txt"
