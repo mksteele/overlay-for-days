@@ -3,18 +3,18 @@ import ttk
 from Tkinter import *
 
 from base_panel import BasePanel
-from util import read_team_names, write_file
+from util import read_teams, write_file
 
 layout = {
     "labels": {
-        "Blue score:": { "row": 0, "col": 0 },
-        "Gold score:": { "row": 1, "col": 0 },
+        #"Blue score:": { "row": 0, "col": 0 },
+        #"Gold score:": { "row": 1, "col": 0 },
         "Blue team:": { "row": 2, "col": 0 },
         "Gold team:": { "row": 3, "col": 0 },
     },
     "text_entries": {
-        "blue score": { "row": 0, "col": 1, "out": "Gold Score.txt" },
-        "gold score": { "row": 1, "col": 1, "out": "Blue Score.txt" },
+        #"blue score": { "row": 0, "col": 1, "out": "Gold Score.txt" },
+        #"gold score": { "row": 1, "col": 1, "out": "Blue Score.txt" },
     },
     "dropdowns": {
         "blue team": { "row": 2, "col": 1, "out": "Blue Team Name.txt"},
@@ -56,7 +56,7 @@ class CurrentGamePanel(BasePanel):
     def create_dropdowns(self):
         """ Not going to create drop downs in a generic way """
 
-        teams = read_team_names()
+        teams = read_teams()
         blue_info = layout["dropdowns"]["blue team"]
         blue_info["string_var"] = StringVar(self.content)
         if len(teams) > 0:

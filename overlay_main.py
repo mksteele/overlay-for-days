@@ -1,6 +1,7 @@
 from Tkinter import Tk
 
 from panels import *
+from util import replace_team_names_with_original
 
 class OverlayForDays:
 
@@ -14,6 +15,10 @@ class OverlayForDays:
 def main():
     root = Tk()
     root.title("Overlay for days")
+
+    # TODO remove
+    replace_team_names_with_original()
+
     app = OverlayForDays(root)
     root.mainloop()
 
