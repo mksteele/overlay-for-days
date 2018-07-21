@@ -6,11 +6,15 @@ from util import replace_team_names_with_original
 class OverlayForDays:
 
     def __init__(self, root):
-        self.team_panel = TeamPanel(root)
+        self.team_panel = TeamPanel(root, self.notify_teams_change)
         self.team_panel.grid(column=0, row=0, padx=10, pady=10)
 
         self.current_game_panel = CurrentGamePanel(root)
         self.current_game_panel.grid(column=1, row=0, padx=10, pady=10)
+
+    def notify_teams_change(self):
+        # Notify all panels that the teams list has changed
+        self.current_game_panel.notify_teams_change()
 
 def main():
     root = Tk()

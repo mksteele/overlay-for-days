@@ -1,0 +1,2 @@
+- Hit backspace to delete
+- Hit delete key to delete

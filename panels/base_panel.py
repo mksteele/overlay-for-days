@@ -19,9 +19,8 @@ class BasePanel:
         self.content.grid_propagate(0)
         self.content.pack(fill=BOTH, expand=1)
 
-    def clear(self):
-        self.content.destroy()
-        self.create_content_frame()
+    def notify_teams_change(self):
+        print("teams changed!")
 
     def grid(self, **kwargs):
         return self.frame.grid(**kwargs)
