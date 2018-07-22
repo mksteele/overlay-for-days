@@ -11,16 +11,15 @@ class ScrollTextPanel(BasePanel):
         BasePanel.__init__(self, parent, 'Scroll Text', width=width,
                 height=height)
 
-        self.create_scroll_texts()
-        self.create_add_scroll_text_entry()
+        self.create_scroll_texts(0)
+        self.create_scroll_texts(1)
 
-    def create_scroll_texts(self):
-        self.scroll_text_list_frame = Frame(self.content, bg='blue',
-                width=self.content.winfo_width())
-        self.scroll_text_list_frame.grid(row=0, column=0)
+    def create_scroll_texts(self, c):
+        self.scroll_text_list_frame = Frame(self.content, bg='blue')#, width=self.width-40)
+        self.scroll_text_list_frame.grid(row=0, column=c)
 
         self.listbox = DragDropListbox(self.scroll_text_list_frame,
-                borderwidth=0, highlightthickness=0)
+                borderwidth=0, highlightthickness=0) #, width=100)
         scrollbar = Scrollbar(self.scroll_text_list_frame)
         scrollbar.pack(side=RIGHT, fill=Y)
         self.listbox.configure(yscrollcommand=scrollbar.set)
@@ -36,6 +35,7 @@ class ScrollTextPanel(BasePanel):
                 self.notify_callback()
         self.listbox.bind('<BackSpace>', rem_scroll_text)
         self.listbox.bind('<Delete>', rem_scroll_text)
+        self.create_add_scroll_text_entry()
 
     def populate_listbox(self):
         #scroll_texts = read_scroll_texts()

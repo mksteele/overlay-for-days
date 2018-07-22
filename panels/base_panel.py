@@ -11,6 +11,7 @@ class BasePanel:
     def __init__(self, parent, text, width=None, height=None):
         self.parent = parent
         self.text = text
+        self.width = width
         self.frame = ttk.LabelFrame(self.parent, text=self.text)
 
         self.content = Frame(self.frame, width=width, height=height,

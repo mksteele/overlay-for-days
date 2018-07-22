@@ -2,8 +2,9 @@ import ttk
 
 from Tkinter import *
 
-from util import read_teams, add_team_to_file, remove_team_from_file
 from base_panel import BasePanel
+from dialogs import AddTeamDialog, EditTeamDialog
+from util import read_teams, add_team_to_file, remove_team_from_file
 
 """
 TeamPanel
@@ -42,11 +43,28 @@ class TeamPanel(BasePanel):
         def rem_team(event):
             selection = self.listbox.curselection()
             if selection:
-                remove_team_from_file(self.listbox.get(selection[0]))
+                team_name = self.listbox.get(selection[0])
+                remove_team_from_file(team_name)
                 self.listbox.delete(selection[0])
                 self.notify_callback()
         self.listbox.bind('<BackSpace>', rem_team)
         self.listbox.bind('<Delete>', rem_team)
+
+        def edit_team(event):
+            selection = self.listbox.curselection()
+            if selection:
+                team_name = self.listbox.get(selection[0])
+                team_info = [team_name, '', '', '', '', '']
+                dialog = EditTeamDialog(self.parent, team_info)
+                if dialog.result and dialog.result != team_info:
+                    remove_team_from_file(team_name)
+                    add_team_to_file(dialog.result[0])
+                    print("someone edited team")
+                    self.listbox.delete(0, 'end')
+                    self.populate_listbox()
+                    self.notify_callback()
+
+        self.listbox.bind('<Double-Button-1>', edit_team)
 
     def populate_listbox(self):
         teams = read_teams()
@@ -55,20 +73,17 @@ class TeamPanel(BasePanel):
 
     def create_add_team_button(self):
         """ Want a text entry where we can add a new team """
-        add_team_str = StringVar(self.content)
-        #add_team_entry = Entry(self.content, textvariable=add_team_str)
-        #add_team_entry.grid(row=1, column=0)
 
-        def add_team_to_listbox(*args):
-            new_team = add_team_str.get().strip()
-            if new_team:
-                add_team_to_file(new_team)
-                add_team_str.set("")
+        def open_add_team_dialog(*args):
+            dialog = AddTeamDialog(self.parent)
+            if(dialog.result):
+                print("someone did add a new team")
+                add_team_to_file(dialog.result[0])
                 self.listbox.delete(0, 'end')
                 self.populate_listbox()
                 self.notify_callback()
 
         add_team_button = Button(self.content, text='Add team',
-                command=add_team_to_listbox)
+                command=open_add_team_dialog)
         add_team_button.grid(row=1, column=0)
 
