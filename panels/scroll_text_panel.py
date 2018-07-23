@@ -11,15 +11,14 @@ class ScrollTextPanel(BasePanel):
         BasePanel.__init__(self, parent, 'Scroll Text', width=width,
                 height=height)
 
-        self.create_scroll_texts(0)
-        self.create_scroll_texts(1)
+        #self.create_scroll_texts()
 
-    def create_scroll_texts(self, c):
-        self.scroll_text_list_frame = Frame(self.content, bg='blue')#, width=self.width-40)
-        self.scroll_text_list_frame.grid(row=0, column=c)
+    def create_scroll_texts(self):
+        self.scroll_text_list_frame = Frame(self.content)
+        self.scroll_text_list_frame.grid(row=0, column=0)
 
         self.listbox = DragDropListbox(self.scroll_text_list_frame,
-                borderwidth=0, highlightthickness=0) #, width=100)
+                borderwidth=0, highlightthickness=0, width=60)
         scrollbar = Scrollbar(self.scroll_text_list_frame)
         scrollbar.pack(side=RIGHT, fill=Y)
         self.listbox.configure(yscrollcommand=scrollbar.set)

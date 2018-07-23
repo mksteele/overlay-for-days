@@ -27,6 +27,8 @@ class OverlayForDays:
         self.scroll_text_panel = ScrollTextPanel(root, width=scroll_text_panel_width, height=230)
         self.scroll_text_panel.grid(row=1, columnspan=2, padx=10, pady=10)
 
+        self.scroll_text_panel.create_scroll_texts()
+
     def notify_teams_change(self):
         # Notify all panels that the teams list has changed
         self.current_game_panel.notify_teams_change()

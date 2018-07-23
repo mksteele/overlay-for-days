@@ -5,6 +5,7 @@ Should I not put any file extensions here, since
 I think I might either write them as .txt or .ods?
 """
 
+RESOURCES_DIR = "resources"
 
 TEAM_NAMES_FILE = "Teams.txt"
 GOLDEN_TEAM_NAMES_FILE = "OrigTeams.txt"

@@ -57,9 +57,10 @@ class TeamPanel(BasePanel):
                 team_info = [team_name, '', '', '', '', '']
                 dialog = EditTeamDialog(self.parent, team_info)
                 if dialog.result and dialog.result != team_info:
-                    remove_team_from_file(team_name)
-                    add_team_to_file(dialog.result[0])
                     print("someone edited team")
+                    remove_team_from_file(team_name)
+                    if dialog.result[0]: # Else, this team was deleted
+                        add_team_to_file(dialog.result[0])
                     self.listbox.delete(0, 'end')
                     self.populate_listbox()
                     self.notify_callback()
